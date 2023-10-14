@@ -32,3 +32,34 @@ def caesarCipher(s, k):
     return shifted_string
 
 ```
+
+# Sherlock and the Valid String
+Sherlock considers a string to be valid if all characters of the string appear the same number of times. It is also valid if he can remove just  character at  index in the string, and the remaining characters will occur the same number of times. Given a string , determine if it is valid. If so, return YES, otherwise return NO.
+
+---------------------------------------
+**Solution**
+```python
+def isValid(s):
+    char_dict = {}
+
+    for char in s:
+        char_dict[char] = char_dict.get(char, 0) + 1
+
+    count_dict = {}
+    for count in char_dict.values():
+        count_dict[count] = count_dict.get(count, 0) + 1
+
+    if len(count_dict) == 1:
+        return 'YES'
+    elif len(count_dict) == 2:
+        key1, key2 = count_dict.keys()
+        if count_dict[key1] == 1:
+            if key1 - 1 == key2 or key1 == 1:
+                return 'YES'
+        if count_dict[key2] == 1:
+            if key2 - 1 == key1 or key2 == 1:
+                return 'YES'
+    return 'NO'
+
+
+```
