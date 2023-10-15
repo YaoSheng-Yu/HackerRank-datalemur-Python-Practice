@@ -63,3 +63,28 @@ def isValid(s):
 
 
 ```
+
+# Climbing the Leaderboard  
+An arcade game player wants to climb to the top of the leaderboard and track their ranking. The game uses Dense Ranking, so its leaderboard works like this:
+
+The player with the highest score is ranked number 1 on the leaderboard.
+Players who have equal scores receive the same ranking number, and the next player(s) receive the immediately following ranking number.
+
+---------------------------------------
+**Solution**
+```python
+def climbingLeaderboard(ranked, player):
+    unique_ranked = sorted(set(ranked), reverse=True)
+    result = []
+    i = len(unique_ranked) - 1  # Start from the lowest rank
+
+    for p in player:
+        while i >= 0 and p >= unique_ranked[i]:
+            i -= 1
+        if i == -1:
+            result.append(1)
+        else:
+            result.append(i + 2)
+
+    return result
+```
