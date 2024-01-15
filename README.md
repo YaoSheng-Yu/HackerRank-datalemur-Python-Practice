@@ -120,3 +120,28 @@ def max_subarray_sum(prices):
   return max_profit
 
 ```
+
+# Max Profit Trading Stocks [Google Python Interview Question] (Greedy)
+Given an integer array, find the sum of the largest contiguous subarray within the array.
+
+For example, if the input is [−1, −3, 5, −4, 3, −6, 9, 2], then return 11 (because of [9, 2]).
+
+Note that if all the elements are negative, you should return 0.
+
+---------------------------------------
+**Solution**
+```python
+def max_subarray_sum(input):
+	if all(x<0 for x in input):
+	  return 0
+	  
+	current_sum = 0
+	max_sum = 0
+	
+	for x in input:
+	  current_sum = max(x, current_sum+x)
+	  max_sum = max(current_sum, max_sum)
+	  
+	return max_sum
+
+```
