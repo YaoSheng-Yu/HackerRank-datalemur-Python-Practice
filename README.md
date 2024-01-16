@@ -145,3 +145,52 @@ def max_subarray_sum(input):
 	return max_sum
 
 ```
+
+# Two Sum [Amazon Python Interview Question]
+
+Given an list of integers called input, and an integer target, return the index of the two numbers which sum up to the target. Do not use the same list element twice.
+
+Clarifications:
+
+Assume there aren't multiple valid solutions.
+In case there is no valid solution, return [-1, -1].
+Return the indexes in increasing order (i.e. [1,3], NOT [3,1]).
+
+Example #1
+Input: input = [1, 4, 6, 10], target = 10
+
+Output: [1, 2]
+
+Example #2
+Input: input = [1, 4, 6, 10], target = 11
+
+Output: [0, 3]
+
+
+Example #3
+**Input: **input = [1, 4, 6, 10], target = 2
+
+Output: [-1, -1]
+
+---------------------------------------
+**Solution**
+```python
+def two_sum(input: list[int], target: int) -> list[int]:
+    # Create a list of tuples with element and its original index
+    indexed_input = [(val, idx) for idx, val in enumerate(input)]
+    # Sort this list of tuples by the elements
+    indexed_input.sort(key=lambda x: x[0])
+
+    i = 0
+    j = len(indexed_input) - 1
+    while i < j:
+        current_sum = indexed_input[i][0] + indexed_input[j][0]
+        if current_sum > target:
+            j -= 1
+        elif current_sum < target:
+            i += 1
+        else:  # current_sum == target
+            # Return the original indices in sorted order
+            return sorted([indexed_input[i][1], indexed_input[j][1]])
+    return [-1, -1]
+```
